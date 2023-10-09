@@ -7,15 +7,17 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet"/>
 
+    <script src="data.js"></script>
     
 
 </head>
 <body>
 
+    <button onclick="sortObject();">ASC</button>
     <div class="container">
         <div class="row">
           <div class="col-sm-4 mb-4">
-            <input type="text" id="myFilter" class="form-control" onkeyup="myFunction()" placeholder="Search for card name...">
+            <input type="text" id="myFilter" class="form-control"   onkeyup="myFunction(event)" placeholder="Search for card name...">
           </div>
         </div>
       

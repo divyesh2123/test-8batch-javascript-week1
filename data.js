@@ -150,3 +150,39 @@ const data= [
       "tools": ["React", "Sass"]
     }
   ]
+
+  function myFunction(e)
+  {
+    
+    console.log(e.key);
+
+    console.log(e.target.value);
+
+    const filterData = data.filter((y)=>{
+
+        return y.position.includes(e.target.value);
+    })
+
+    console.log(filterData);
+
+
+   
+  }
+
+  function sortObject()
+  {
+        data.sort(function(a,b) {
+
+            if(a.company > b.company)
+            {
+                return 1;
+            }
+            else
+            {
+                return -1;
+            }
+
+        })
+
+        console.log(data);
+  }
