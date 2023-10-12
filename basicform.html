@@ -36,6 +36,10 @@
     }).then(y=>y.json())
     .then(y=> {
         console.log(y)
+
+        localStorage.setItem("token",y.jwtToken);
+
+        window.location.href ="account.html";
     })
 
 

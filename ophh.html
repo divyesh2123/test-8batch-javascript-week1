@@ -1,0 +1,36 @@
+<input type="text" id="amountInput" 
+placeholder="Enter an amount" value="1.00" />
+
+<script>
+const amountInput = document.getElementById("amountInput");
+let currentValue = "";
+
+// Function to format the input value
+function formatInputValue(inputValue) {
+  // Remove non-numeric characters and leading zeros
+  let sanitizedInput = inputValue.replace(/[^0-9]/g, '').replace(/^0+/, '');
+
+  // Calculate the position of the decimal point
+  const decimalPosition = sanitizedInput.length - 2; // Assumes 2 decimal places
+
+  // Reconstruct the value with the decimal point in the correct position
+  return sanitizedInput.slice(0, decimalPosition) + '.' + sanitizedInput.slice(decimalPosition);
+}
+
+// Initialize the input with the formatted default value
+amountInput.value = formatInputValue(amountInput.value);
+
+amountInput.addEventListener("input", function () {
+  // Get the input value
+  const inputValue = amountInput.value;
+
+  // Format the input value
+  const formattedValue = formatInputValue(inputValue);
+
+  // Update the input field with the formatted value
+  amountInput.value = formattedValue;
+
+  // Save the current value for the next input event
+  currentValue = formattedValue;
+});
+</script>
