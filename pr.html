@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+       
+        let d = new Promise(function(resolve,reject) {
+
+            let x= 1;
+
+            if(x==1)
+            {
+                resolve(1)
+            }
+            else
+            {
+                reject("error");
+            }
+
+
+        })
+
+        d.then(y=>{
+            console.log(y)
+
+            alert("this is the promise")
+        }).catch(y=>{
+
+            console.log(y)
+        })
+
+        alert("this is the outside code")
+
+
+      
+
+    </script>
+    
+</body>
+</html>
