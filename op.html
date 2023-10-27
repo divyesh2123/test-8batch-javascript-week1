@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload=" display();">
+    
+   
+    <input type="hidden" id="index" value="-1"/>
+    <input type="text" id="name" />
+    <input type="text" id="number"/>
+    <select id="type">
+        <option>Mobile</option>
+        <option>Home</option>
+        <option>office</option>
+    </select>
+
+    <input type="button" id="savecontactInfo"  value="Save" onclick="saveInfo()"/>
+
+    <input type="text"  id="searchTerm"/>
+    <input type="button" value="search" onclick="search()"/>
+
+    <table id="display">
+
+    </table>
+    <script>
+
+        const search = ()=>{
+
+            let myitems = JSON.parse(localStorage.getItem("contactInfo"))?? [] ;
+
+            let searchTerm = document.getElementById("searchTerm").value;
+
+
+            let fiterdata = myitems.filter((value)=>{
+
+                return value.name.includes(searchTerm) || value.type.includes(searchTerm) || value.number.includes(searchTerm);
+
+            })
+
+            displayInfo(fiterdata);
+
+
+            console.log(fiterdata);
+        }
+
+        function saveInfo()
+        {
+
+            let indexToEdit = document.getElementById("index").value
+            let myitems = JSON.parse(localStorage.getItem("contactInfo"))?? [] 
+            let obj ={
+                "name": document.getElementById("name").value,
+                "number": document.getElementById("number").value,
+                "type": document.getElementById("type").value
+
+            }
+
+         
+
+            if(indexToEdit== "-1")
+            {
+            myitems.push(obj);
+            }
+            else
+            {
+                myitems[indexToEdit]= obj;
+            }
+
+            document.getElementById("index").value = "-1";
+            localStorage.setItem("contactInfo",JSON.stringify(myitems));
+
+
+            display();
+        }
+
+        const display = ()=>{
+
+            let myitems = JSON.parse(localStorage.getItem("contactInfo"))?? [] 
+
+            displayInfo(myitems);
+
+
+        }
+
+        const displayInfo = (myitems)=>{
+
+            const values = myitems.map((t,index)=>{
+
+return(`<tr><td>${t.name}</td>
+    <td>${t.number}</td><td>${t.type}</td><td>
+        <button onclick="deleteInfo('${index}')">Delete</button>
+        </td>
+        <td>
+        <button onclick="editInfo('${index}')">Edit</button>
+        </td>
+        </tr>`)
+
+})
+
+document.getElementById("display").innerHTML = values.join(" ");
+
+        }
+
+        const deleteInfo =(index)=>{
+
+            let myitems = JSON.parse(localStorage.getItem("contactInfo"))?? [] ;
+
+            myitems.splice(index,1);
+
+            localStorage.setItem("contactInfo",JSON.stringify(myitems));
+
+            display();
+
+        }
+
+        const editInfo = (index)=>{
+
+            let myitems = JSON.parse(localStorage.getItem("contactInfo"))?? [] ;
+            document.getElementById("name").value = myitems[index].name;
+            document.getElementById("number").value = myitems[index].number;
+            document.getElementById("type").value = myitems[index].type;
+
+            document.getElementById("index").value=index;
+        }
+       
+    </script>
+</body>
+</html>

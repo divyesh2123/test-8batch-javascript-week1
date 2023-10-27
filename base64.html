@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="file" onchange="saveInfo(event)"/>
+
+    <script>
+
+        function saveInfo(e)
+        {
+            let p = e.target.files[0];
+
+            let d= convertBase64(p).then(y=>{
+
+
+                localStorage.setItem("test",y);
+            })
+           
+
+
+
+        }
+
+        const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+       
+
+    </script>
+    
+</body>
+</html>
