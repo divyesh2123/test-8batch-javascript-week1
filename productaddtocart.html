@@ -33,8 +33,21 @@
     </ul>
   </div>
 </nav>
+<select id="searchCategory">
+
+  <option value="start">start with</option>
+  <option value="end">end with</option>
+  <option value="contains">contains</option>
+
+</select>
+
+<input type="text" id="searchTerm" />
+
+<button onclick="searchValue()">seaach</button>
     <div id="mycart"></div>
     <div class="row" id="carts"></div>
+
+  
 
     <div class="offcanvas offcanvas-start" id="demo">
         <div class="offcanvas-header">
@@ -60,6 +73,41 @@
                 Products = y;
                 display(y);
             })
+
+        }
+
+
+
+        const searchValue = ()=>{
+
+
+
+         
+          let filterData= Products.filter((value)=>{
+
+            let selectedcat = document.getElementById("searchCategory").value;
+
+            let searchTerm = document.getElementById("searchTerm").value;
+            switch(selectedcat)
+            {
+            case "start": 
+          
+              return value.title.startsWith(searchTerm);
+
+            case "end": 
+
+            return value.title.endsWith(searchTerm);
+
+            case "contains":
+
+            return value.title.includes(searchTerm);
+
+            }
+
+          })
+
+
+          display(filterData);
 
         }
 
