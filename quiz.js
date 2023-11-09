@@ -1,3 +1,5 @@
+const selectedanws=[];
+
 const questions= [
     {
       "questionText": "What is a closure in JavaScript?",
@@ -61,10 +63,10 @@ const display = ()=>{
     document.getElementById("question").innerHTML = questions[index].questionText;
 
     
-    document.getElementById("op1").innerHTML = questions[index].options[0];
-    document.getElementById("op2").innerHTML = questions[index].options[1];
-    document.getElementById("op3").innerHTML = questions[index].options[2];
-    document.getElementById("op4").innerHTML = questions[index].options[3];
+    document.getElementById("op1").value = questions[index].options[0];
+    document.getElementById("op2").value = questions[index].options[1];
+    document.getElementById("op3").value = questions[index].options[2];
+    document.getElementById("op4").value = questions[index].options[3];
 
     document.getElementById("l1").innerHTML = questions[index].options[0];
     document.getElementById("l2").innerHTML = questions[index].options[1];
@@ -75,13 +77,49 @@ const display = ()=>{
 
 const next = ()=>{
 
+   
+
+
+    selectedanws[index]= document.querySelector('input[name="ans"]:checked').value;
+
+
+   let d =  document.querySelector('input[name="ans"]:checked');
+
+    d.checked = false;
+
     index = index+1;
     display();
 }
-const pre= ()=>{
-    index = index-1;
+// const pre= ()=>{
+//     index = index-1;
 
-    display();
+//     display();
+
+// }
+
+const finalresult = ()=>{
+
+   console.log(selectedanws)
+
+  let d= selectedanws.reduce((pre,value,indexse)=>{
+
+    let findIndex = questions.findIndex((v,index)=>{
+
+      return  indexse ==index && v.correctAnswer ==value;
+
+    })
+
+    if(findIndex >= 0)
+    {
+
+        pre = pre +1;
+    }
+
+    return pre;
+
+   },0);
+
+   console.log(d);
 
 }
 display();
